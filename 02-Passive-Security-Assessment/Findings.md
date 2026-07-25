@@ -139,3 +139,45 @@
 
 - Terminal output from `dig NS torlegacy.com`
 - Screenshot: `Screenshots/DNS-NS-01.png`
+
+## 4. Mail Exchange (MX) Analysis
+
+### Observations
+
+| Priority | Mail Server |
+|----------|-------------|
+| 5 | mx1-hosting.jellyfish.systems |
+| 10 | mx2-hosting.jellyfish.systems |
+| 20 | mx3-hosting.jellyfish.systems |
+
+DNS Response Status: **NOERROR**
+
+---
+
+### Security Assessment
+
+#### Positive Observations
+
+- The domain has three MX records configured for email delivery.
+- Multiple MX records provide redundancy, allowing email delivery to continue if one mail server becomes unavailable.
+- The MX records use priority values (5, 10, and 20), enabling mail servers to be contacted in the correct order.
+
+#### Informational Observation
+
+- The domain's email service is hosted by **jellyfish.systems** rather than on the web server itself.
+
+---
+
+### Risk Assessment
+
+| Finding | Risk Level |
+|----------|------------|
+| Multiple MX Records Configured | Low Risk |
+| Priority-Based Mail Routing | Low Risk |
+
+---
+
+### Evidence
+
+- Terminal output from `dig MX torlegacy.com`
+- Screenshot: `Screenshots/DNS-MX-01.png`
