@@ -304,3 +304,20 @@ DNS Response Status: **NOERROR**
 
 - Terminal output from `dig TXT default._domainkey.torlegacy.com`
 - Screenshot: `Screenshots/DNS-DKIM-01.png`
+
+## 8. TLS/SSL Analysis
+
+### Observations
+
+- HTTPS is enabled and accessible.
+- The website presents a valid TLS certificate.
+- Certificate Subject: torlegacy.com
+- Certificate issued by Google Trust Services (WE1).
+- Certificate validity:
+  - Not Before: 13 July 2026
+  - Not After: 12 October 2026
+- TLS 1.3 was successfully negotiated.
+- Cipher Suite:
+  TLS_AES_256_GCM_SHA384
+- HTTP/2 is supported.
+- Certificate verification completed successfully.
