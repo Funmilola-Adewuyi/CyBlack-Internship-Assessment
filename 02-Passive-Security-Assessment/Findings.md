@@ -260,3 +260,47 @@ DNS Response Status: **NOERROR**
 
 - Terminal output from `dig TXT _dmarc.torlegacy.com`
 - Screenshot: `Screenshots/DNS-DMARC-01.png`
+
+## 7. DKIM Analysis
+
+### Observations
+
+| DKIM Selector | Status |
+|---------------|--------|
+| default | DKIM record present |
+
+| Attribute | Value |
+|-----------|-------|
+| Version | DKIM1 |
+| Key Type | RSA |
+| Public Key | Present |
+
+---
+
+### Security Assessment
+
+#### Positive Observations
+
+- A DKIM (DomainKeys Identified Mail) record is configured using the `default` selector.
+- The domain publishes a valid RSA public key for email signature verification.
+- DKIM helps receiving mail servers verify that outgoing email has not been altered in transit and was sent by an authorized source.
+
+#### Informational Observation
+
+- The public key is published in DNS as expected for DKIM authentication.
+
+---
+
+### Risk Assessment
+
+| Finding | Risk Level |
+|----------|------------|
+| DKIM Record Present | Low Risk |
+| RSA Public Key Published | Low Risk |
+
+---
+
+### Evidence
+
+- Terminal output from `dig TXT default._domainkey.torlegacy.com`
+- Screenshot: `Screenshots/DNS-DKIM-01.png`
