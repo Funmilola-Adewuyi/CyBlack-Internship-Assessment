@@ -181,3 +181,82 @@ DNS Response Status: **NOERROR**
 
 - Terminal output from `dig MX torlegacy.com`
 - Screenshot: `Screenshots/DNS-MX-01.png`
+
+## 5. TXT Record Analysis
+
+### Observations
+
+| TXT Record | Purpose |
+|------------|---------|
+| google-site-verification=... | Google site ownership verification |
+| mailerlite-domain-verification=... | MailerLite domain verification |
+| v=spf1 include:_spf.mlsend.com +a +mx +ip4:198.54.114.25 include:spf.web-hosting.com include:sendersrv.com ~all | SPF record for email sender authorization |
+
+---
+
+### Security Assessment
+
+#### Positive Observations
+
+- An SPF (Sender Policy Framework) record is configured.
+- The SPF record authorizes multiple legitimate email sending services, helping to reduce email spoofing.
+- Google Site Verification and MailerLite verification records are present, confirming ownership for those services.
+
+#### Informational Observation
+
+- The SPF policy ends with `~all` (SoftFail). This means email from unauthorized senders is marked as suspicious rather than being outright rejected.
+
+---
+
+### Risk Assessment
+
+| Finding | Risk Level |
+|----------|------------|
+| SPF Record Present | Low Risk |
+| Google and MailerLite Verification Records | Informational |
+| SPF SoftFail (`~all`) | Low Risk |
+
+---
+
+### Evidence
+
+- Terminal output from `dig TXT torlegacy.com`
+- Screenshot: `Screenshots/DNS-TXT-01.png`
+
+## 6. DMARC Analysis
+
+### Observations
+
+| DMARC Record | Value |
+|--------------|-------|
+| DMARC Policy | v=DMARC1; p=none; |
+
+---
+
+### Security Assessment
+
+#### Positive Observations
+
+- A DMARC (Domain-based Message Authentication, Reporting and Conformance) record is configured.
+- The presence of a DMARC record demonstrates that the domain has implemented email authentication monitoring.
+
+#### Potential Improvement
+
+- The DMARC policy is currently set to **p=none**, which only monitors email authentication results.
+- The domain has implemented DMARC with a monitoring-only (`p=none`) policy. Organizations commonly use this policy during deployment before moving to stricter enforcement such as `quarantine` or `reject`.
+
+---
+
+### Risk Assessment
+
+| Finding | Risk Level |
+|----------|------------|
+| DMARC Record Present | Low Risk |
+| Policy set to `p=none` | Informational / Low |
+
+---
+
+### Evidence
+
+- Terminal output from `dig TXT _dmarc.torlegacy.com`
+- Screenshot: `Screenshots/DNS-DMARC-01.png`
